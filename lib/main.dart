@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import "package:flutter_localizations/flutter_localizations.dart";
 import 'package:travel_app/screens/categories_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../screens/category_trips_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,8 +22,8 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
 
-      locale: const Locale("ar"),
-      supportedLocales: const [Locale("ar"), Locale("en")],
+      locale: const Locale("ar", "AE"),
+      supportedLocales: const [Locale("ar", "AE"), Locale("en", "EN")],
 
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
@@ -31,6 +32,7 @@ class MyApp extends StatelessWidget {
       ],
 
       home: const CategoriesScreen(),
+      routes: {"/category_trips": (ctx) => CategoryTripsScreen()},
     );
   }
 }
