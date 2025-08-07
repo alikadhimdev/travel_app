@@ -10,10 +10,12 @@ class CategoriesScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueAccent,
-        title: Center(
-          child: Text(
-            "دليل سياحي",
-            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+        title: Text(
+          "دليل سياحي",
+          style: TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 16,
           ),
         ),
       ),

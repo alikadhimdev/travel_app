@@ -1,0 +1,109 @@
+import 'package:flutter/material.dart';
+import 'package:travel_app/models/app_data.dart';
+
+class TripDetailsScreen extends StatelessWidget {
+  static const screenRoute = "/trip_details";
+  const TripDetailsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final tripId = ModalRoute.of(context)?.settings.arguments as String;
+    final selectedTrip = Trips_data.firstWhere((trip) => trip.id == tripId);
+
+    return Scaffold(
+      appBar: AppBar(title: Text(selectedTrip.title)),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              height: 250,
+              child: Image(
+                fit: BoxFit.cover,
+                image: NetworkImage(selectedTrip.imageUrl),
+              ),
+            ),
+
+            sectionTitle("الانشطة"),
+
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 15),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              height: 200,
+              child: ListView.builder(
+                itemCount: selectedTrip.activities.length,
+
+                itemBuilder: (ctx, i) {
+                  return Card(
+                    elevation: 0,
+                    child: Padding(
+                      padding: const EdgeInsets.all(3),
+                      child: Text(selectedTrip.activities[i]),
+                    ),
+                  );
+                },
+              ),
+            ),
+
+            sectionTitle("البرنامج اليومي"),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 15),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(color: Colors.grey),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              height: 200,
+              child: ListView.builder(
+                itemCount: selectedTrip.program.length,
+
+                itemBuilder: (ctx, i) {
+                  return Column(
+                    children: [
+                      ListTile(
+                        leading: CircleAvatar(
+                          backgroundColor: Colors.blueAccent,
+
+                          child: Text(
+                            "يوم ${i + 1}",
+                            style: TextStyle(color: Colors.white, fontSize: 10),
+                          ),
+                        ),
+                        title: Text(
+                          selectedTrip.program[i],
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ),
+                      Divider(),
+                    ],
+                  );
+                },
+              ),
+            ),
+
+            SizedBox(height: 100),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container sectionTitle(String title) {
+    return Container(
+      padding: EdgeInsets.all(15),
+      alignment: Alignment.centerRight,
+      child: Text(
+        title,
+        style: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Colors.blueAccent,
+          fontSize: 16,
+        ),
+      ),
+    );
+  }
+}

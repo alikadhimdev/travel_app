@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:travel_app/screens/category_trips_screen.dart';
 
 class CategoryItem extends StatelessWidget {
   final String title;
@@ -13,7 +14,7 @@ class CategoryItem extends StatelessWidget {
 
   void selectCat(BuildContext ctx) {
     Navigator.of(ctx).pushNamed(
-      "/category_trips",
+      CategoryTripsScreen.screenRoute,
       arguments: {'id': id, 'title': title},
     ); //arguments: {'id': id, 'title': title},
   }
@@ -42,7 +43,7 @@ class CategoryItem extends StatelessWidget {
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.bold,
-                fontSize: 30,
+                fontSize: 18,
               ),
             ),
           ),

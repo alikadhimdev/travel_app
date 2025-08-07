@@ -1,13 +1,17 @@
+enum Season { winter, spring, summer, autumn }
+
+enum TripType { exploration, recovery, activities, therapy }
+
 class Trip {
-  final String id,
-      categories,
-      title,
-      tripType,
-      season,
-      imageUrl,
-      duration,
-      activities,
-      program;
+  final String id;
+  final List<String> categories;
+  final String title;
+  final TripType tripType;
+  final Season season;
+  final String imageUrl;
+  final int duration;
+  final List<String> activities;
+  final List<String> program;
   final bool isInSummer, isForFamilies, isInWinter;
 
   const Trip({

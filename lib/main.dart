@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import "package:flutter_localizations/flutter_localizations.dart";
 import 'package:travel_app/screens/categories_screen.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:travel_app/screens/trip_details_screen.dart';
 import '../screens/category_trips_screen.dart';
 
 void main() {
@@ -31,8 +32,13 @@ class MyApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
 
-      home: const CategoriesScreen(),
-      routes: {"/category_trips": (ctx) => CategoryTripsScreen()},
+      // home: const CategoriesScreen(),
+      initialRoute: "/",
+      routes: {
+        "/": (ctx) => CategoriesScreen(),
+        CategoryTripsScreen.screenRoute: (ctx) => CategoryTripsScreen(),
+        TripDetailsScreen.screenRoute: (ctx) => TripDetailsScreen(),
+      },
     );
   }
 }
