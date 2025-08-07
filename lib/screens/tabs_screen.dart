@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/screens/categories_screen.dart';
 import 'package:travel_app/screens/favorite_screen.dart';
+import 'package:travel_app/widgets/app_drawer.dart';
 
 class TabScreen {
   final Widget screen;
@@ -40,6 +41,7 @@ class _TabsScreenState extends State<TabsScreen> {
           ),
         ),
       ),
+      drawer: AppDrawer(),
       body: _screens[_selectedScreenIndex].screen,
       bottomNavigationBar: BottomNavigationBar(
         onTap: _selectTab,
