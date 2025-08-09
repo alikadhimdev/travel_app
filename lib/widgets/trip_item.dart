@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:travel_app/models/app_data.dart';
 import 'package:travel_app/models/trip.dart';
 import 'package:travel_app/screens/trip_details_screen.dart';
 
@@ -10,7 +9,6 @@ class TripItem extends StatelessWidget {
   final Season season;
   final TripType tripType;
   final String id;
-  final Function removeTrip;
 
   const TripItem({
     super.key,
@@ -20,7 +18,6 @@ class TripItem extends StatelessWidget {
     required this.season,
     required this.tripType,
     required this.id,
-    required this.removeTrip,
   });
 
   String get seasonText {
@@ -54,7 +51,7 @@ class TripItem extends StatelessWidget {
       ctx,
     ).pushNamed(TripDetailsScreen.screenRoute, arguments: id).then((value) {
       if (value != null) {
-        removeTrip(value);
+        // removeTrip(value);
       }
     });
   }

@@ -27,10 +27,10 @@ class _MyAppState extends State<MyApp> {
   };
 
   List<Trip> _availableTrips = Trips_data;
+  final List<Trip> _favoriteTrips = [];
 
   void _changeFilters(Map<String, bool> filtersData) {
     setState(() {
-      print(filtersData);
       _filters = filtersData;
       _availableTrips = Trips_data.where((trip) {
         if (_filters["summer"] == true && trip.isInSummer != true) {
@@ -46,6 +46,26 @@ class _MyAppState extends State<MyApp> {
         return true;
       }).toList();
     });
+  }
+
+  void _manageFavorite(String tripId) {
+    final existingIndex = _favoriteTrips.indexWhere(
+      (trip) => trip.id == tripId,
+    );
+
+    if (existingIndex >= 0) {
+      setState(() {
+        _favoriteTrips.removeAt(existingIndex);
+      });
+    } else {
+      setState(() {
+        _favoriteTrips.add(Trips_data.firstWhere((trip) => trip.id == tripId));
+      });
+    }
+  }
+
+  bool _isFavorite(String tripId) {
+    return _favoriteTrips.any((trip) => trip.id == tripId);
   }
 
   // This widget is the root of your application.
@@ -71,10 +91,13 @@ class _MyAppState extends State<MyApp> {
       // home: const CategoriesScreen(),
       initialRoute: "/",
       routes: {
-        "/": (ctx) => TabsScreen(),
+        "/": (ctx) => TabsScreen(favoriteTrips: _favoriteTrips),
         CategoryTripsScreen.screenRoute: (ctx) =>
             CategoryTripsScreen(availableTrips: _availableTrips),
-        TripDetailsScreen.screenRoute: (ctx) => TripDetailsScreen(),
+        TripDetailsScreen.screenRoute: (ctx) => TripDetailsScreen(
+          manageFavorite: _manageFavorite,
+          isFavorite: _isFavorite,
+        ),
         SettingScreen.screenRoute: (ctx) => SettingScreen(
           currentFilters: _filters,
           saveFilters: _changeFilters,

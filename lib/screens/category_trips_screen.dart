@@ -61,7 +61,6 @@ class _CategoryTripsScreenState extends State<CategoryTripsScreen> {
               duration: displayTrips[i].duration,
               tripType: displayTrips[i].tripType,
               season: displayTrips[i].season,
-              removeTrip: _removeTrip,
             ),
           );
         },
