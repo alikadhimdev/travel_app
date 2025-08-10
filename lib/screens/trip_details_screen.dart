@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:travel_app/models/app_data.dart';
+import 'package:travel_app/services/data_service.dart';
+import 'package:travel_app/widgets/safe_network_image.dart';
 
 class TripDetailsScreen extends StatelessWidget {
   static const screenRoute = "/trip_details";
@@ -14,20 +15,18 @@ class TripDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final tripId = ModalRoute.of(context)?.settings.arguments as String;
-    final selectedTrip = Trips_data.firstWhere((trip) => trip.id == tripId);
+    final selectedTrip = DataService.trips.firstWhere((trip) => trip.id == tripId);
 
     return Scaffold(
       appBar: AppBar(title: Text(selectedTrip.title)),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
+            SafeNetworkImage(
+              imageUrl: selectedTrip.imageUrl,
               width: double.infinity,
               height: 250,
-              child: Image(
-                fit: BoxFit.cover,
-                image: NetworkImage(selectedTrip.imageUrl),
-              ),
+              fit: BoxFit.cover,
             ),
 
             sectionTitle("الانشطة"),

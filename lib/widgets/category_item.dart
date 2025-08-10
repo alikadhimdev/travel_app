@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/screens/category_trips_screen.dart';
+import 'package:travel_app/widgets/safe_network_image.dart';
 
 class CategoryItem extends StatelessWidget {
   final String title;
@@ -29,7 +30,12 @@ class CategoryItem extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(15),
-            child: Image.network(imageUrl, height: 250, fit: BoxFit.cover),
+            child: SafeNetworkImage(
+              imageUrl: imageUrl,
+              width: double.infinity,
+              height: 250,
+              fit: BoxFit.cover,
+            ),
           ),
           Container(
             padding: EdgeInsets.all(10),

@@ -61,7 +61,9 @@ class _MyAppState extends State<MyApp> {
       });
     } else {
       setState(() {
-        _favoriteTrips.add(DataService.trips.firstWhere((trip) => trip.id == tripId));
+        _favoriteTrips.add(
+          DataService.trips.firstWhere((trip) => trip.id == tripId),
+        );
       });
     }
   }
