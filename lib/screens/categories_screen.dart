@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/widgets/category_item.dart';
-import '../models/app_data.dart';
+import '../services/data_service.dart';
 
 class CategoriesScreen extends StatelessWidget {
   const CategoriesScreen({super.key});
@@ -16,13 +16,15 @@ class CategoriesScreen extends StatelessWidget {
         crossAxisSpacing: 10,
       ),
 
-      children: Categories_data.map(
-        (item) => CategoryItem(
-          imageUrl: item.imageUrl,
-          title: item.title,
-          id: item.id,
-        ),
-      ).toList(),
+      children: DataService.categories
+          .map(
+            (item) => CategoryItem(
+              imageUrl: item.imageUrl,
+              title: item.title,
+              id: item.id,
+            ),
+          )
+          .toList(),
     );
   }
 }

@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import "package:flutter_localizations/flutter_localizations.dart";
 import 'package:google_fonts/google_fonts.dart';
-import 'package:travel_app/models/app_data.dart';
+import 'package:travel_app/services/data_service.dart';
 import 'package:travel_app/screens/setting_screen.dart';
 import 'package:travel_app/screens/tabs_screen.dart';
 import 'package:travel_app/screens/trip_details_screen.dart';
 import '../screens/category_trips_screen.dart';
 import './models/trip.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await DataService.loadData();
   runApp(const MyApp());
 }
 
@@ -26,13 +28,13 @@ class _MyAppState extends State<MyApp> {
     "family": false,
   };
 
-  List<Trip> _availableTrips = Trips_data;
+  List<Trip> _availableTrips = DataService.trips;
   final List<Trip> _favoriteTrips = [];
 
   void _changeFilters(Map<String, bool> filtersData) {
     setState(() {
       _filters = filtersData;
-      _availableTrips = Trips_data.where((trip) {
+      _availableTrips = DataService.trips.where((trip) {
         if (_filters["summer"] == true && trip.isInSummer != true) {
           return false;
         }
@@ -59,7 +61,7 @@ class _MyAppState extends State<MyApp> {
       });
     } else {
       setState(() {
-        _favoriteTrips.add(Trips_data.firstWhere((trip) => trip.id == tripId));
+        _favoriteTrips.add(DataService.trips.firstWhere((trip) => trip.id == tripId));
       });
     }
   }
